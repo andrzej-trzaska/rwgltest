@@ -57,7 +57,7 @@ void ObjMesh::parse_mtl(string filename) {
 		} else if(!line.find("newmtl ")) {
 			ObjMaterial o = {0};
 			//char* name = "";
-			sscanf_s(line.c_str(), "newmtl %s", o.name);
+			sscanf_s(line.c_str(), "newmtl %s", o.name);	// tu sie wysypuje
 			getline(ifstrm, line);
 			sscanf_s(line.c_str(), "Ka %f %f %f", o.ambient[0], o.ambient[1], o.ambient[2]);
 			getline(ifstrm, line);
