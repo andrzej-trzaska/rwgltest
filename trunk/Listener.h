@@ -5,4 +5,3 @@ public:
 	Listener(void);
 	~Listener(void);
 };
-
