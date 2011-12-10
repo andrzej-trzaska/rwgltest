@@ -69,6 +69,7 @@ void ObjMesh::parse_mtl(string filename) {
 			Materials.push_back(o);
 		}
 	}
+	ifstrm.close();
 }
 
 void ObjMesh::DrawMe(void) {
