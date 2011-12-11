@@ -47,8 +47,6 @@ struct ObjMaterial {
 class ObjMesh {
 public:
     ObjMesh(string filename);
-
-
 	void DrawMe(void);
 	void SaveAs(string filename);
     ~ObjMesh(void);
