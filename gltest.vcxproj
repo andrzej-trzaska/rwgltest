@@ -15,11 +15,13 @@
     <ClCompile Include="src\Listener.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ObjMesh.cpp" />
+    <ClCompile Include="Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Camera.h" />
     <ClInclude Include="src\Listener.h" />
     <ClInclude Include="src\ObjMesh.h" />
+    <ClInclude Include="Texture.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{37D16025-FE85-42C8-8279-DD314765D9DA}</ProjectGuid>
