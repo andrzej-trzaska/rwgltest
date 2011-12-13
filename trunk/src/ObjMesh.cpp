@@ -16,8 +16,13 @@ void ObjMesh::parse_obj(string filename) {
 	while(getline(ifstrm, line)) {
 		if(!line.find("# ")) {
 		} else if (line.empty()) {
+		} else if(!line.find("usemtl ")) {
+			//Texture2 o;
+			line.replace(0, 7, "");
+			//o.name = line;
+			//Texture2.push_back(o);
 		} else if(!line.find("v ")) {
-			ObjVertex o = {0, 0 ,0};
+			ObjVertex o;// = {0, 0 ,0};
 			sscanf_s(line.c_str(), "v %f %f %f", &o.x, &o.y, &o.z);
 			VertexArray.push_back(o);
 		} else if(!line.find("vn ")) {
@@ -55,17 +60,17 @@ void ObjMesh::parse_mtl(string filename) {
 		if(!line.find("# ")) {
 		} else if(line.empty()) {
 		} else if(!line.find("newmtl ")) {
-			ObjMaterial o = {0};
-			//char* name = "";
-			sscanf_s(line.c_str(), "newmtl %s", o.name);	// tu sie wysypuje
+			ObjMaterial o;
+			line.replace(0, 7, "");
+			o.name = line;
 			getline(ifstrm, line);
-			sscanf_s(line.c_str(), "Ka %f %f %f", o.ambient[0], o.ambient[1], o.ambient[2]);
+			sscanf_s(line.c_str(), "Ka %f %f %f", &o.ambient[0], &o.ambient[1], &o.ambient[2]);
 			getline(ifstrm, line);
-			sscanf_s(line.c_str(), "Kd %f %f %f", o.diffuse[0], o.diffuse[1], o.diffuse[2]);
+			sscanf_s(line.c_str(), "Kd %f %f %f", &o.diffuse[0], &o.diffuse[1], &o.diffuse[2]);
 			getline(ifstrm, line);
-			sscanf_s(line.c_str(), "Kd %f %f %f", o.specular[0], o.specular[1], o.specular[2]);
+			sscanf_s(line.c_str(), "Ks %f %f %f", &o.specular[0], &o.specular[1], &o.specular[2]);
 			getline(ifstrm, line);
-			sscanf_s(line.c_str(), "illum %d", o.illum);
+			sscanf_s(line.c_str(), "illum %d", &o.illum);
 			Materials.push_back(o);
 		}
 	}
@@ -76,7 +81,13 @@ void ObjMesh::DrawMe(void) {
 	glPushMatrix();
 	glRotatef(180, 0.0f, 1.0f, 0.0f); // reverse on y
 
-	//glEnable(GL_TEXTURE_2D);
+	glEnable(GL_TEXTURE_2D);
+
+	//glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT,Ka->getArrayRGBA());
+	//glMaterialfv(GL_FRONT_AND_BACK,GL_DIFFUSE,Kd->getArrayRGBA());
+	//glMaterialfv(GL_FRONT_AND_BACK,GL_SPECULAR,Ks->getArrayRGBA());
+	//glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, Ns);
+	//glBindTexture(GL_TEXTURE_2D, textures[0].data);
 	glBegin(GL_TRIANGLES);
 
 

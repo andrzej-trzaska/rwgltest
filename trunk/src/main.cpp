@@ -327,16 +327,16 @@ bool init_Textures(void) {
 //
 void init_All(void) {
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_DEPTH);
-	glutInitWindowSize(500, 500);
+	glutInitWindowSize(800, 600);
 	glutInitWindowPosition(100, 100);
 	glutCreateWindow("A basic OpenGL Window");
-	glutFullScreen();
+	//glutFullScreen();
 	glutSetCursor(GLUT_CURSOR_NONE);
 
 	pick_CubePositions();
 	init_Rendering();
-	//init_Textures();
 	init_Models();
+	init_Textures();
 	init_Audio();
 }
 

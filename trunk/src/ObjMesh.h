@@ -11,6 +11,7 @@
 #else
 #include <GL/glut.h>
 #endif
+#include <SOIL.h>
 
 using namespace std;
 
@@ -31,17 +32,23 @@ struct ObjTexCoord {
 };
 
 struct ObjFace {
-    int Vertex[3];
-    int Normal[3];
-    int TexCoord[3];
+    uint Vertex[3];
+    uint Normal[3];
+    uint TexCoord[3];
+	uint TextureNo;
 };
 
 struct ObjMaterial {
-	char* name;
-	float ambient[4];
-	float diffuse[4];
-	float specular[4];
+	//char* name;
+	string name;
+	float ambient[3];
+	float diffuse[3];
+	float specular[3];
 	Byte illum;
+};
+struct Texture2 {
+	string name;
+	GLuint data;
 };
 
 class ObjMesh {
@@ -61,4 +68,5 @@ private:
 	vector<ObjTexCoord> TexCoordArray;
 	vector<ObjFace> FaceArray;
 	vector<ObjMaterial> Materials;
+	vector<Texture2> textures;
 };
