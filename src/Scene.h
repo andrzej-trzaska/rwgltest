@@ -17,75 +17,23 @@
  * SOFTWARE.
  */
 
-#ifndef OBJMESH_H
-#define OBJMESH_H
+#ifndef SCENE_H
+#define SCENE_H
 
 #include <string>
 #include <fstream>
 #include <vector>
 
-#ifdef __APPLE__
-#include <OpenGL/OpenGL.h>
-#include <GLUT/glut.h>
-#else
-#include <GL/glut.h>
-#endif
-
 using namespace std;
 
-typedef unsigned int uint;
-typedef unsigned short ushort;
-typedef unsigned char Byte;
-
-struct ObjVertex {
-    float x, y, z;
-};
-
-struct ObjNormal {
-	float x, y, z;
-};
-
-struct ObjTexCoord {
-    float u, v;
-};
-
-struct ObjFace {
-    uint Vertex[3];
-    uint Normal[3];
-    uint TexCoord[3];
-	GLuint TextureNo;
-};
-
-struct ObjMaterial {
-	//char* name;
-	string name;
-	float ambient[3];
-	float diffuse[3];
-	float specular[3];
-	Byte illum;
-	GLuint matId;
-};
-struct Texture2 {
-	string name;
-	GLuint data;
-};
-
-class ObjMesh {
+class Scene {
 public:
-    ObjMesh(string filename);
-	void DrawMe(void);
-    ~ObjMesh(void);
+	Scene(void);
+	void load(string filename);
+	void draw(void);
+	~Scene(void);
 
 private:
-	void parse_obj(string filename);
-	void parse_mtl(string filename);
-
-	ifstream ifstrm;
-	vector<ObjVertex> VertexArray;
-	vector<ObjNormal> NormalArray;
-	vector<ObjTexCoord> TexCoordArray;
-	vector<ObjFace> FaceArray;
-	vector<ObjMaterial> Materials;
 };
 
 #endif

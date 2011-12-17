@@ -5,69 +5,81 @@ Ka 0.00 0.00 0.00
 Kd 0.80 0.80 0.80
 Ks 0.50 0.50 0.50
 illum 1
+map_Kd lights.tga
 
 newmtl nodmg
 Ka 0.00 0.00 0.00
 Kd 0.80 0.80 0.80
 Ks 0.50 0.50 0.50
 illum 1
+map_Kd nodamage.tga
 
 newmtl glass
 Ka 0.00 0.00 0.00
 Kd 0.80 0.80 0.80
 Ks 0.50 0.50 0.50
 illum 4
+map_Kd glass0.tga
 
 newmtl lights1
 Ka 0.00 0.00 0.00
 Kd 0.80 0.80 0.80
 Ks 0.50 0.50 0.50
 illum 4
+map_Kd lights.tga
 
 newmtl black
 Ka 0.00 0.00 0.00
 Kd 0.60 0.60 0.60
 Ks 0.50 0.50 0.50
 illum 4
+map_Kd black.tga
 
 newmtl c0
 Ka 0.00 0.00 0.00
 Kd 0.25 0.00 0.25
 Ks 0.50 0.50 0.50
 illum 4
+map_Kd carbonFiber.tga
 
 newmtl inner_rim
 Ka 0.00 0.00 0.00
 Kd 0.80 0.80 0.80
 Ks 0.50 0.50 0.50
 illum 1
+map_Kd wheel.tga
 
 newmtl undercarriage
 Ka 0.00 0.00 0.00
 Kd 0.80 0.80 0.80
 Ks 0.50 0.50 0.50
 illum 4
+map_Kd grille2.tga
 
 newmtl grille1
 Ka 0.00 0.00 0.00
 Kd 0.80 0.80 0.80
 Ks 0.50 0.50 0.50
 illum 4
+map_Kd grille1.tga
 
 newmtl badge
 Ka 0.00 0.00 0.00
 Kd 0.80 0.80 0.80
 Ks 0.50 0.50 0.50
 illum 4
+map_Kd wheel.tga
 
 newmtl rim
 Ka 0.00 0.00 0.00
 Kd 0.80 0.80 0.80
 Ks 0.50 0.50 0.50
 illum 1
+map_Kd wheel0.tga
 
 newmtl tire
 Ka 0.00 0.00 0.00
 Kd 0.80 0.80 0.80
 Ks 0.50 0.50 0.50
 illum 4
+map_Kd tireA0.tga
