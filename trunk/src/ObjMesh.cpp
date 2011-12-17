@@ -1,12 +1,33 @@
+/* Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above notice and this permission notice shall be included in all copies
+ * or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
 #include "ObjMesh.h"
+#include <SOIL.h>
 
 ObjMesh::ObjMesh(string filename) {
-	parse_obj(filename);
 	parse_mtl(filename);
+	parse_obj(filename);
 }
 
 void ObjMesh::parse_obj(string filename) {
 	string line;
+	uint materialid = 1;
 
 	ifstrm.open(filename);
 	if(!ifstrm.is_open()) {
@@ -17,10 +38,13 @@ void ObjMesh::parse_obj(string filename) {
 		if(!line.find("# ")) {
 		} else if (line.empty()) {
 		} else if(!line.find("usemtl ")) {
-			//Texture2 o;
 			line.replace(0, 7, "");
-			//o.name = line;
-			//Texture2.push_back(o);
+			for(uint i = 0; i < Materials.size(); i++) {
+				if(Materials[i].name == line) {
+					materialid = Materials[i].matId;
+					break;
+				}
+			}
 		} else if(!line.find("v ")) {
 			ObjVertex o;// = {0, 0 ,0};
 			sscanf_s(line.c_str(), "v %f %f %f", &o.x, &o.y, &o.z);
@@ -39,6 +63,7 @@ void ObjMesh::parse_obj(string filename) {
 				&o.Vertex[0], &o.TexCoord[0], &o.Normal[0],
 				&o.Vertex[1], &o.TexCoord[1], &o.Normal[1],
 				&o.Vertex[2], &o.TexCoord[2], &o.Normal[2]);
+			o.TextureNo = materialid;
 			FaceArray.push_back(o);
 		}
 	}
@@ -63,14 +88,24 @@ void ObjMesh::parse_mtl(string filename) {
 			ObjMaterial o;
 			line.replace(0, 7, "");
 			o.name = line;
+
 			getline(ifstrm, line);
 			sscanf_s(line.c_str(), "Ka %f %f %f", &o.ambient[0], &o.ambient[1], &o.ambient[2]);
+
 			getline(ifstrm, line);
 			sscanf_s(line.c_str(), "Kd %f %f %f", &o.diffuse[0], &o.diffuse[1], &o.diffuse[2]);
+
 			getline(ifstrm, line);
 			sscanf_s(line.c_str(), "Ks %f %f %f", &o.specular[0], &o.specular[1], &o.specular[2]);
+
 			getline(ifstrm, line);
 			sscanf_s(line.c_str(), "illum %d", &o.illum);
+
+			getline(ifstrm, line);
+			line.replace(0, 7, "");
+			string mtlfile = "./Data/";
+			mtlfile += line;
+			o.matId = SOIL_load_OGL_texture(mtlfile.c_str(), SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_INVERT_Y);
 			Materials.push_back(o);
 		}
 	}
@@ -80,18 +115,19 @@ void ObjMesh::parse_mtl(string filename) {
 void ObjMesh::DrawMe(void) {
 	glPushMatrix();
 	glRotatef(180, 0.0f, 1.0f, 0.0f); // reverse on y
-
+	GLuint currtexture = 0;
 	glEnable(GL_TEXTURE_2D);
-
-	//glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT,Ka->getArrayRGBA());
-	//glMaterialfv(GL_FRONT_AND_BACK,GL_DIFFUSE,Kd->getArrayRGBA());
-	//glMaterialfv(GL_FRONT_AND_BACK,GL_SPECULAR,Ks->getArrayRGBA());
-	//glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, Ns);
-	//glBindTexture(GL_TEXTURE_2D, textures[0].data);
-	glBegin(GL_TRIANGLES);
-
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 	for(uint i = 0; i < FaceArray.size(); i++) {
+		if(currtexture != FaceArray[i].TextureNo) {
+			glEnd();
+			currtexture = FaceArray[i].TextureNo;
+			glBindTexture(GL_TEXTURE_2D, currtexture);
+			glBegin(GL_TRIANGLES);
+		}
+
 		for(int j = 0; j < 3; j++) {
 			glTexCoord2f(
 				TexCoordArray[FaceArray[i].TexCoord[j] - 1].u, 
@@ -110,52 +146,6 @@ void ObjMesh::DrawMe(void) {
 	glPopMatrix();
 	glDisable(GL_TEXTURE_2D);
 }
-
-void ObjMesh::SaveAs(string filename) {
-	ofstream of(filename);
-
-	if(!of.is_open()) return;
-
-	of << "# Vertices" << endl << endl;
-
-	for(uint i = 0; i < VertexArray.size(); i++) {
-		of << "v " << VertexArray[i].x << " "
-			       << VertexArray[i].y << " "
-				   << VertexArray[i].z << endl;
-	}
-	of << endl << "# Normals" << endl << endl;
-
-	for(uint i = 0; i < NormalArray.size(); i++) {
-		of << "vn " << NormalArray[i].x << " "
-			        << NormalArray[i].y << " "
-					<< NormalArray[i].z << endl;
-	}
-
-	of << endl << "# Texture Coords" << endl << endl;
-
-	for(uint i = 0; i < TexCoordArray.size(); i++) {
-		of << "vt " << TexCoordArray[i].u << " "
-			        << TexCoordArray[i].v << endl;
-	}
-
-	of << endl << "# Faces" << endl << endl;
-
-	for(uint i = 0; i < FaceArray.size(); i++) {
-		of << "f ";
-		for(int j = 0; j < 3; j++) {
-			of << FaceArray[i].Vertex[j] << "/"
-			   << FaceArray[i].TexCoord[j] << "/"
-			   << FaceArray[i].Normal[j];
-			if(j < 2) {
-				of << " ";
-			}
-		}
-		of << endl;
-	}
-
-	of << endl << "# End";
-}
-
 
 ObjMesh::~ObjMesh(void) {
 	delete this;

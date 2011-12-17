@@ -1,4 +1,22 @@
-#pragma region includes
+/* Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above notice and this permission notice shall be included in all copies
+ * or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
 #include <stdlib.h>			// exit()
 #include <math.h>			// sin() cos()
 
@@ -15,38 +33,23 @@
 #include "ObjMesh.h"
 #include "Camera.h"
 #include "Listener.h"
-#pragma endregion
 
-#pragma region pragma comments
-#pragma comment(lib, "alut.lib")
-#pragma comment(lib, "OpenAL32.lib")
-#pragma comment(lib, "SOIL.lib")
-#pragma endregion
-
-#pragma region defines
 #define NUM_BUFFERS         10
 #define NUM_SOURCES         10
 #define NUM_ENVIRONMENTS    1
-
 #define FALSE               0
 #define TRUE                1
-#pragma endregion
 
-#pragma region variables
 //angle of rotation
 float   xpos = 0, ypos = 0, zpos = 0, xrot = 0, yrot = 0, angle = 0.0;
 float   cRadius = 10.0f;    //our radius distance from our character
 int     lastx, lasty;
-
 //positions of the cubes
 float   position[10][3];
-
 //light position
 GLfloat lightPos0[] = { 4.0f, 5.0f, 8.0f, 1.0f };       //Positioned at (4, 5, 8)
-
 //textures
 GLuint  texture[3];         //Storage For One Texture ( NEW )
-
 //sounds
 ALfloat listenerPos[] = { 0.0, 0.0, 4.0 };
 ALfloat listenerVel[] = { 0.0, 0.0, 0.0 };
@@ -59,10 +62,8 @@ ALuint  environment[NUM_ENVIRONMENTS];
 ALsizei size, freq;
 ALenum  format;
 ALvoid  *data;
-
 //meshes
 ObjMesh *mesh;
-#pragma endregion
 
 //=======================================================================================================================
 //   set the positions of the cubes
@@ -290,7 +291,7 @@ void init_Models(void)
 
 	//mesh = new ObjMesh("./Data/girl.obj");
 	//mesh = new ObjMesh("./Data/torus.obj");
-	mesh = new ObjMesh("./Data/rapide/rapide.obj");
+	mesh = new ObjMesh("./Data/rapide.obj");
 	//ObjMesh mesh("./Data/rapide/rapide.obj");
 	//ObjMesh *mesh = new ObjMesh("./Data/rapide/rapide.obj");
 	//meshes.push_back(mesh);
