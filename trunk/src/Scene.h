@@ -24,16 +24,35 @@
 #include <fstream>
 #include <vector>
 
+#ifdef __APPLE__
+#include <OpenGL/OpenGL.h>
+#include <GLUT/glut.h>
+#else
+#include <GL/glut.h>
+#endif
+
 using namespace std;
+
+class ObjMesh;
+
+struct Mesh_Struct {
+	string filename;
+	float pos[3];
+	float scale[3];
+	float rot[3];
+	ObjMesh *mesh;
+};
 
 class Scene {
 public:
-	Scene(void);
+	Scene(string filename);
 	void load(string filename);
 	void draw(void);
 	~Scene(void);
 
 private:
+	ifstream ifstrm;
+	vector<Mesh_Struct> Meshes;
 };
 
 #endif

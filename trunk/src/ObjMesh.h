@@ -57,17 +57,12 @@ struct ObjFace {
 };
 
 struct ObjMaterial {
-	//char* name;
 	string name;
 	float ambient[3];
 	float diffuse[3];
 	float specular[3];
 	Byte illum;
 	GLuint matId;
-};
-struct Texture2 {
-	string name;
-	GLuint data;
 };
 
 class ObjMesh {
