@@ -1,8 +1,7 @@
 # 3ds Max Wavefront OBJ Exporter v0.97b - (c)2007 guruware
-# File Created: 18.12.2011 18:07:20
+# File Created: 18.12.2011 23:54:15
 
 newmtl None_cactus1_tga
-Tf 1.0000 1.0000 1.0000
 Ka 0.0000 0.0000 0.0000
 Kd 0.8000 0.8000 0.8000
 Ks 0.8000 0.8000 0.8000

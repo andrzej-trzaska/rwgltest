@@ -35,27 +35,13 @@
 #define NUM_BUFFERS         10
 #define NUM_SOURCES         10
 #define NUM_ENVIRONMENTS    1
-#define FALSE               0
-#define TRUE                1
 
 //angle of rotation
 float   xpos = 0, ypos = 0, zpos = 0, xrot = 0, yrot = 0, angle = 0.0;
 float   cRadius = 10.0f;    //our radius distance from our character
 int     lastx, lasty;
-//light position
-GLfloat lightPos0[] = { 4.0f, 5.0f, 8.0f, 1.0f };       //Positioned at (4, 5, 8)
 //sounds
 ALfloat listenerPos[] = { 0.0, 0.0, 4.0 };
-ALfloat listenerVel[] = { 0.0, 0.0, 0.0 };
-ALfloat listenerOri[] = { 0.0, 0.0, 1.0, 0.0, 1.0, 0.0 };
-ALfloat source0Pos[] = { 0.0, 0.0, 0.0 };
-ALfloat source0Vel[] = { 0.0, 0.0, 0.0 };
-ALuint  buffer[NUM_BUFFERS];
-ALuint  source[NUM_SOURCES];
-ALuint  environment[NUM_ENVIRONMENTS];
-ALsizei size, freq;
-ALenum  format;
-ALvoid  *data;
 
 Scene *scene;
 
@@ -64,7 +50,16 @@ Scene *scene;
 //=======================================================================================================================
 //
 void init_Audio(void) {
-    char    al_bool;
+	char    al_bool;
+	ALfloat listenerVel[] = { 0.0, 0.0, 0.0 };
+	ALfloat listenerOri[] = { 0.0, 0.0, 1.0, 0.0, 1.0, 0.0 };
+	ALfloat source0Pos[] = { 0.0, 0.0, 0.0 };
+	ALfloat source0Vel[] = { 0.0, 0.0, 0.0 };
+	ALuint  buffer[NUM_BUFFERS];
+	ALuint  source[NUM_SOURCES];
+	ALsizei size, freq;
+	ALenum  format;
+	ALvoid  *data;
 
     glClearColor(0.0, 0.0, 0.0, 1.0);
 
@@ -115,15 +110,11 @@ void init_Rendering(void) {
 	glDepthFunc(GL_LEQUAL);     //The Type Of Depth Testing To Do
 	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);  //Really Nice Perspective Calculations
 
+	glutFullScreen();
 
-	//lights
-	GLfloat redDiffuseMaterial[] = { 1.0, 0.0, 0.0 };       //set the material to red
-	GLfloat whiteSpecularMaterial[] = { 1.0, 1.0, 1.0 };    //set the material to white
-	GLfloat greenEmissiveMaterial[] = { 0.0, 1.0, 0.0 };    //set the material to green
-	GLfloat whiteSpecularLight[] = { 1.0, 1.0, 1.0 };       //set the light specular to white
-	GLfloat blackAmbientLight[] = { 0.0, 0.0, 0.0 };        //set the light ambient to black
-	GLfloat whiteDiffuseLight[] = { 1.0, 1.0, 1.0 };        //set the diffuse light to white
-	GLfloat blankMaterial[] = { 0.0, 0.0, 0.0 };            //set the diffuse light to white
+	//light position
+	GLfloat lightPos0[] = { 4.0f, 5.0f, 8.0f, 1.0f };       //Positioned at (4, 5, 8)
+	glLightfv(GL_LIGHT0, GL_POSITION, lightPos0);
 
 	//Setup Material Porperties & colours for the light
 	{
@@ -172,7 +163,6 @@ void init_All(void) {
 void callback_draw(void) {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();
-	glLightfv(GL_LIGHT0, GL_POSITION, lightPos0);
 
     glTranslatef(0.0f, 0.0f, -cRadius);
     glRotatef(xrot, 1.0, 0.0, 0.0);
