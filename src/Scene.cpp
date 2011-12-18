@@ -24,11 +24,6 @@ Scene::Scene(string filename) {
 	load(filename);
 }
 
-
-Scene::~Scene(void) {
-
-}
-
 void Scene::load(string filename) {
 	string line;
 
@@ -67,4 +62,8 @@ void Scene::draw(void) {
 	}
 
 	glPopMatrix();
+}
+
+Scene::~Scene(void) {
+	delete this;
 }

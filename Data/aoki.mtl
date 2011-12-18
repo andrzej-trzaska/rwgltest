@@ -1,0 +1,177 @@
+# 3ds Max Wavefront OBJ Exporter v0.97b - (c)2007 guruware
+# File Created: 18.12.2011 23:29:08
+
+newmtl MmdMtl000
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+Ks 0.0500 0.0500 0.0500
+illum 2
+map_Kd la_eyeW.jpg
+
+newmtl MmdMtl001
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+Ks 0.0500 0.0500 0.0500
+illum 2
+map_Kd la_eyeL.jpg
+
+newmtl MmdMtl002
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+Ks 0.0500 0.0500 0.0500
+illum 2
+map_Kd la_eyeR.jpg
+
+newmtl MmdMtl003
+illum 2
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+Ks 0.0500 0.0500 0.0500
+map_Kd la_skin.jpg
+
+newmtl MmdMtl004
+Ka 0.1250 0.1250 0.1250
+Kd 0.8000 0.8000 0.8000
+Ks 0.0500 0.0500 0.0500
+illum 2
+map_Kd la_skin.jpg
+
+newmtl MmdMtl005
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+Ks 0.0500 0.0500 0.0500
+illum 2
+map_Kd la_skin.jpg
+
+newmtl MmdMtl006
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+Ks 0.0500 0.0500 0.0500
+illum 2
+map_Kd la_skin.jpg
+
+newmtl MmdMtl007
+Ka 0.1250 0.1250 0.1250
+Kd 0.8000 0.8000 0.8000
+Ks 0.0500 0.0500 0.0500
+illum 2
+map_Kd la_skin.jpg
+
+newmtl MmdMtl008
+Ka 0.2500 0.2500 0.2500
+Kd 1.0000 1.0000 1.0000
+Ks 0.0500 0.0500 0.0500
+illum 2
+map_Kd la_hair.jpg
+
+newmtl MmdMtl009
+Ka 0.2500 0.2500 0.2500
+Kd 1.0000 1.0000 1.0000
+Ks 0.0500 0.0500 0.0500
+illum 2
+map_Kd la_hair.jpg
+
+newmtl MmdMtl010
+Ka 0.2500 0.2500 0.2500
+Kd 1.0000 1.0000 1.0000
+Ks 0.0500 0.0500 0.0500
+illum 2
+map_Kd la_hair.jpg
+
+newmtl MmdMtl011
+Ka 0.2500 0.2500 0.2500
+Kd 1.0000 1.0000 1.0000
+Ks 0.0500 0.0500 0.0500
+illum 2
+map_Kd la_hair.jpg
+
+newmtl MmdMtl012
+Ka 0.2500 0.2500 0.2500
+Kd 1.0000 1.0000 1.0000
+Ks 0.0500 0.0500 0.0500
+illum 2
+map_Kd la_hair.jpg
+
+newmtl MmdMtl013
+Ka 0.2500 0.2500 0.2500
+Kd 1.0000 1.0000 1.0000
+Ks 0.0500 0.0500 0.0500
+illum 2
+map_Kd la_hair.jpg
+
+newmtl MmdMtl014
+Ka 0.2500 0.2500 0.2500
+Kd 1.0000 1.0000 1.0000
+Ks 0.0500 0.0500 0.0500
+illum 2
+map_Kd la_hair.jpg
+
+newmtl MmdMtl015
+Ka 0.2500 0.2500 0.2500
+Kd 1.0000 1.0000 1.0000
+Ks 0.0500 0.0500 0.0500
+illum 2
+map_Kd la_hair.jpg
+
+newmtl MmdMtl016
+Ka 0.1250 0.1250 0.1250
+Kd 0.8000 0.8000 0.8000
+Ks 0.0500 0.0500 0.0500
+illum 2
+map_Kd la_suit.jpg
+
+newmtl MmdMtl017
+Ka 0.1250 0.1250 0.1250
+Kd 0.8000 0.8000 0.8000
+Ks 0.0500 0.0500 0.0500
+illum 2
+map_Kd la_suit.jpg
+
+newmtl MmdMtl018
+Ka 0.1250 0.1250 0.1250
+Kd 0.8000 0.8000 0.8000
+Ks 0.0500 0.0500 0.0500
+illum 2
+map_Kd la_suit.jpg
+
+newmtl MmdMtl019
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+Ks 0.3000 0.3000 0.3000
+illum 2
+map_Kd la_cl.tga
+
+newmtl MmdMtl020
+Ka 0.1250 0.1250 0.1250
+Kd 0.8000 0.8000 0.8000
+Ks 0.0500 0.0500 0.0500
+illum 2
+map_Kd la_cl.tga
+
+newmtl MmdMtl021
+Ka 0.1250 0.1250 0.1250
+Kd 0.8000 0.8000 0.8000
+Ks 0.0500 0.0500 0.0500
+illum 2
+map_Kd la_cl.tga
+
+newmtl MmdMtl022
+Ka 0.1250 0.1250 0.1250
+Kd 0.8000 0.8000 0.8000
+Ks 0.0500 0.0500 0.0500
+illum 2
+map_Kd la_cl.tga
+
+newmtl MmdMtl023
+Ka 0.1250 0.1250 0.1250
+Kd 0.8000 0.8000 0.8000
+Ks 0.0500 0.0500 0.0500
+illum 2
+map_Kd la_cl.tga
+
+newmtl MmdMtl024
+Ka 0.2500 0.2500 0.2500
+Kd 1.0000 1.0000 1.0000
+Ks 0.0500 0.0500 0.0500
+illum 2
+map_Kd cheek.tga
