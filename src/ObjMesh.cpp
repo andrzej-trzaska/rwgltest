@@ -113,12 +113,10 @@ void ObjMesh::parse_mtl(string filename) {
 }
 
 void ObjMesh::DrawMe(void) {
-	glPushMatrix();
-	glRotatef(180, 0.0f, 1.0f, 0.0f); // reverse on y
 	GLuint currtexture = 0;
+
+	glPushMatrix();
 	glEnable(GL_TEXTURE_2D);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 	for(uint i = 0; i < FaceArray.size(); i++) {
 		if(currtexture != FaceArray[i].TextureNo) {
@@ -129,17 +127,14 @@ void ObjMesh::DrawMe(void) {
 		}
 
 		for(int j = 0; j < 3; j++) {
-			glTexCoord2f(
-				TexCoordArray[FaceArray[i].TexCoord[j] - 1].u, 
-				TexCoordArray[FaceArray[i].TexCoord[j] - 1].v);
-			glNormal3f(
-				NormalArray[FaceArray[i].Normal[j] - 1].x, 
-				NormalArray[FaceArray[i].Normal[j] - 1].y, 
-				NormalArray[FaceArray[i].Normal[j] - 1].z);
-			glVertex3f(
-				VertexArray[FaceArray[i].Vertex[j] - 1].x, 
-				VertexArray[FaceArray[i].Vertex[j] - 1].y, 
-				VertexArray[FaceArray[i].Vertex[j] - 1].z);
+			glTexCoord2f(TexCoordArray[FaceArray[i].TexCoord[j] - 1].u, 
+				         TexCoordArray[FaceArray[i].TexCoord[j] - 1].v);
+			glNormal3f(NormalArray[FaceArray[i].Normal[j] - 1].x, 
+				       NormalArray[FaceArray[i].Normal[j] - 1].y, 
+				       NormalArray[FaceArray[i].Normal[j] - 1].z);
+			glVertex3f(VertexArray[FaceArray[i].Vertex[j] - 1].x, 
+					   VertexArray[FaceArray[i].Vertex[j] - 1].y, 
+				       VertexArray[FaceArray[i].Vertex[j] - 1].z);
 		}
 	}
 	glEnd();

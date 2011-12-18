@@ -18,13 +18,53 @@
  */
 
 #include "Scene.h"
+#include "ObjMesh.h"
 
-
-Scene::Scene(void) {
-
+Scene::Scene(string filename) {
+	load(filename);
 }
 
 
 Scene::~Scene(void) {
 
+}
+
+void Scene::load(string filename) {
+	string line;
+
+	ifstrm.open(filename);
+	if(!ifstrm.is_open()) {
+		return;
+	}
+
+	while(getline(ifstrm, line)) {
+		if(!line.find("# ")) {
+		} else if (line.empty()) {
+		} else {
+			Mesh_Struct o;
+			char fn[20];
+			sscanf(line.c_str(), "%s %f %f %f %f %f %f %f %f %f", fn, &o.pos[0], &o.pos[1], &o.pos[2], 
+				&o.scale[0], &o.scale[1], &o.scale[2], &o.rot[0], &o.rot[1], &o.rot[2]);
+			o.filename = fn;
+			o.mesh = new ObjMesh("./Data/" + o.filename);
+			Meshes.push_back(o);
+		}
+	}
+}
+
+void Scene::draw(void) {
+	glPushMatrix();
+
+	for(uint i = 0; i < Meshes.size(); i++) {
+		glPushMatrix();
+		glTranslatef(Meshes[i].pos[0], Meshes[i].pos[1], Meshes[i].pos[2]);
+		glRotatef(Meshes[i].rot[0], 1.0f, 0.0f, 0.0f);
+		glRotatef(Meshes[i].rot[1], 0.0f, 1.0f, 0.0f);
+		glRotatef(Meshes[i].rot[2], 0.0f, 0.0f, 1.0f);
+		glScalef(Meshes[i].scale[0], Meshes[i].scale[1], Meshes[i].scale[2]);
+		Meshes[i].mesh->DrawMe();
+		glPopMatrix();
+	}
+
+	glPopMatrix();
 }
