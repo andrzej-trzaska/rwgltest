@@ -49,7 +49,6 @@ public:
 	void load(string filename);
 	void draw(void);
 	~Scene(void);
-
 private:
 	ifstream ifstrm;
 	vector<Mesh_Struct> Meshes;

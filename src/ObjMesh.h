@@ -70,7 +70,6 @@ public:
     ObjMesh(string filename);
 	void DrawMe(void);
     ~ObjMesh(void);
-
 private:
 	void parse_obj(string filename);
 	void parse_mtl(string filename);

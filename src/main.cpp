@@ -45,10 +45,6 @@ ALfloat listenerPos[] = { 0.0, 0.0, 4.0 };
 
 Scene *scene;
 
-//=======================================================================================================================
-//   init OpenAL
-//=======================================================================================================================
-//
 void init_Audio(void) {
 	char    al_bool;
 	ALfloat listenerVel[] = { 0.0, 0.0, 0.0 };
@@ -95,10 +91,6 @@ void init_Audio(void) {
 	alSourcePlay(source[0]);
 }
 
-//=======================================================================================================================
-//   init OpenGL
-//=======================================================================================================================
-//
 void init_Rendering(void) {
 	glClearColor(0.5f,0.5f,0.5f,0.0f);
 	glShadeModel(GL_SMOOTH);    //set the shader to smooth shader
@@ -131,19 +123,10 @@ void init_Rendering(void) {
 	}
 }
 
-
-//=======================================================================================================================
-//   Load Scene
-//=======================================================================================================================
-//
 void init_Scene(void) {
 	scene = new Scene("./data/Scene.Scene");
 }
 
-//=======================================================================================================================
-//   initialization
-//=======================================================================================================================
-//
 void init_All(void) {
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_DEPTH);
 	glutInitWindowSize(800, 600);
@@ -156,10 +139,6 @@ void init_All(void) {
 	init_Audio();
 }
 
-//=======================================================================================================================
-//   display func
-//=======================================================================================================================
-//
 void callback_draw(void) {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();
@@ -174,10 +153,6 @@ void callback_draw(void) {
     glutSwapBuffers();  //swap the buffers
 }
 
-//=======================================================================================================================
-//   reshape func
-//=======================================================================================================================
-//
 void callback_reshape(int w, int h) {
     glViewport(0, 0, (GLsizei) w, (GLsizei) h); //set the viewport to the current window specifications
     glMatrixMode(GL_PROJECTION);    //set the matrix to projection
@@ -186,10 +161,6 @@ void callback_reshape(int w, int h) {
     glMatrixMode(GL_MODELVIEW); //set the matrix back to model
 }
 
-//=======================================================================================================================
-//   mouse func
-//=======================================================================================================================
-//
 void callback_motion(int x, int y) {
     int diffx = x - lastx;  //check the difference between the current x and the last x position
     int diffy = y - lasty;  //check the difference between the current y and the last y position
@@ -200,10 +171,6 @@ void callback_motion(int x, int y) {
     yrot += diffx;  //set the xrot to yrot with the addition of the difference in the x position
 }
 
-//=======================================================================================================================
-//   keyboard func
-//=======================================================================================================================
-//
 void callback_keyboard(unsigned char key, int x, int y) {
     if (key == 'q') {
         xrot += 1;
@@ -272,10 +239,6 @@ void callback_keyboard(unsigned char key, int x, int y) {
     }
 }
 
-//=======================================================================================================================
-//   entry point
-//=======================================================================================================================
-//
 int main(int argc, char **argv) {
 	glutInit(&argc, argv);
     alutInit(&argc, argv);
