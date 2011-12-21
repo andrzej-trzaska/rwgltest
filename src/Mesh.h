@@ -19,11 +19,10 @@
  * SOFTWARE.
  */
 
-#ifndef SCENE_H_
-#define SCENE_H_
+#ifndef MESH_H_
+#define MESH_H_
 
 #include <string>
-#include <fstream>
 #include <vector>
 
 #ifdef __APPLE__
@@ -35,33 +34,42 @@
 
 using namespace std;
 
-#include "Sound.h"
-#include "Light.h"
-
-class ObjMesh;
-
-struct Mesh_Struct {
-	string Name;
-	GLfloat pos[3];
-	GLfloat scale[3];
-	GLfloat rot[3];
-	ObjMesh *mesh;
+struct Vertex {
+    float x, y, z;
 };
 
-class Scene {
-public:
-	Scene(string filename);
-	void load(string filename);
-	void draw(void);
-	~Scene(void);
-private:
-	ifstream ifstrm;
-	vector<Mesh_Struct> Meshes;
-	vector<Sound*> Sounds;
-	vector<Light*> Lights;
-
-    void playAllSounds(void);
-    void init_Glut(void);
+struct Normal {
+	float x, y, z;
 };
 
-#endif /* SCENE_H_ */
+struct TexCoord {
+    float u, v;
+};
+
+struct Face {
+    GLuint Vertex[3];
+    GLuint Normal[3];
+    GLuint TexCoord[3];
+	GLuint TextureNo;
+};
+
+struct Material {
+	string name;
+	GLfloat ambient[3];
+	GLfloat diffuse[3];
+	GLfloat specular[3];
+	GLbyte illum;
+	GLuint matId;
+};
+
+class Mesh {
+protected:
+	string name;
+	vector<Vertex> VertexArray;
+	vector<Normal> NormalArray;
+	vector<TexCoord> TexCoordArray;
+	vector<Face> FaceArray;
+	vector<Material> Materials;
+};
+
+#endif /* MESH_H_ */

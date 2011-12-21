@@ -1,13 +1,15 @@
-/* Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- * 
- * The above notice and this permission notice shall be included in all copies
- * or substantial portions of the Software.
- * 
+/* Copyright (C) 2011 Andrzej Trzaska
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of
+ * this software and associated documentation files (the "Software"), to deal in
+ * the Software without restriction, including without limitation the rights to
+ * use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+ * of the Software, and to permit persons to whom the Software is furnished to do
+ * so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -27,7 +29,7 @@ ObjMesh::ObjMesh(string filename) {
 
 void ObjMesh::parse_obj(string filename) {
 	string line;
-	uint materialid = 1;
+	GLuint materialid = 1;
 
 	ifstrm.open(filename);
 	if(!ifstrm.is_open()) {
@@ -39,26 +41,26 @@ void ObjMesh::parse_obj(string filename) {
 		} else if (line.empty()) {
 		} else if(!line.find("usemtl ")) {
 			line.replace(0, 7, "");
-			for(uint i = 0; i < Materials.size(); i++) {
+			for(GLuint i = 0; i < Materials.size(); i++) {
 				if(Materials[i].name == line) {
 					materialid = Materials[i].matId;
 					break;
 				}
 			}
 		} else if(!line.find("v ")) {
-			ObjVertex o;// = {0, 0 ,0};
+			Vertex o;// = {0, 0 ,0};
 			sscanf_s(line.c_str(), "v %f %f %f", &o.x, &o.y, &o.z);
 			VertexArray.push_back(o);
 		} else if(!line.find("vn ")) {
-			ObjNormal o = {0, 0 ,0};
+			Normal o = {0, 0 ,0};
 			sscanf_s(line.c_str(), "vn %f %f %f", &o.x, &o.y, &o.z);
 			NormalArray.push_back(o);
 		} else if(!line.find("vt ")) {
-			ObjTexCoord o = {0, 0};
+			TexCoord o = {0, 0};
 			sscanf_s(line.c_str(), "vt %f %f", &o.u, &o.v);
 			TexCoordArray.push_back(o);
 		} else if(!line.find("f ")) {
-			ObjFace o;
+			Face o;
 			sscanf_s(line.c_str(), "f %d/%d/%d %d/%d/%d %d/%d/%d",
 				&o.Vertex[0], &o.TexCoord[0], &o.Normal[0],
 				&o.Vertex[1], &o.TexCoord[1], &o.Normal[1],
@@ -72,7 +74,7 @@ void ObjMesh::parse_obj(string filename) {
 
 void ObjMesh::parse_mtl(string filename) {
 	string fname = filename;
-	uint fn = fname.find(".obj");
+	GLuint fn = fname.find(".obj");
 	fname.replace(fn, 4, ".mtl");
 	
 	ifstrm.open(fname);
@@ -85,7 +87,7 @@ void ObjMesh::parse_mtl(string filename) {
 		if(!line.find("# ")) {
 		} else if(line.empty()) {
 		} else if(!line.find("newmtl ")) {
-			ObjMaterial o;
+			Material o;
 			line.replace(0, 7, "");
 			o.name = line;
 
@@ -118,7 +120,7 @@ void ObjMesh::DrawMe(void) {
 	glPushMatrix();
 	glEnable(GL_TEXTURE_2D);
 
-	for(uint i = 0; i < FaceArray.size(); i++) {
+	for(GLuint i = 0; i < FaceArray.size(); i++) {
 		if(currtexture != FaceArray[i].TextureNo) {
 			glEnd();
 			currtexture = FaceArray[i].TextureNo;
