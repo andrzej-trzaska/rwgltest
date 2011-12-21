@@ -19,12 +19,8 @@
  * SOFTWARE.
  */
 
-#ifndef SCENE_H_
-#define SCENE_H_
-
-#include <string>
-#include <fstream>
-#include <vector>
+#ifndef LIGHT_H_
+#define LIGHT_H_
 
 #ifdef __APPLE__
 #include <OpenGL/OpenGL.h>
@@ -33,35 +29,24 @@
 #include <GL/glut.h>
 #endif
 
-using namespace std;
-
-#include "Sound.h"
-#include "Light.h"
-
-class ObjMesh;
-
-struct Mesh_Struct {
-	string Name;
-	GLfloat pos[3];
-	GLfloat scale[3];
-	GLfloat rot[3];
-	ObjMesh *mesh;
-};
-
-class Scene {
+class Light {
 public:
-	Scene(string filename);
-	void load(string filename);
-	void draw(void);
-	~Scene(void);
+	Light(int light_num);
+	static void Init(void);
+	void DrawMe(void);
+	void Enable(void);
+	void Disable(void);
+    void setPos(GLfloat pos[4]);
+    void setAmbient(GLfloat amb[4]);
+    void setDiffuse(GLfloat dif[4]);
+    void setSpecular(GLfloat spec[4]);
+	virtual ~Light(void);
 private:
-	ifstream ifstrm;
-	vector<Mesh_Struct> Meshes;
-	vector<Sound*> Sounds;
-	vector<Light*> Lights;
-
-    void playAllSounds(void);
-    void init_Glut(void);
+    GLenum LightNo;
+	GLfloat pos[4];
+	GLfloat Ambient[4];
+	GLfloat Diffuse[4];
+	GLfloat Specular[4];
 };
 
-#endif /* SCENE_H_ */
+#endif /* LIGHT_H_ */

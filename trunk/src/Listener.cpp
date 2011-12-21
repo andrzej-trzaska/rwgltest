@@ -19,49 +19,34 @@
  * SOFTWARE.
  */
 
-#ifndef SCENE_H_
-#define SCENE_H_
+#include "Listener.h"
 
-#include <string>
-#include <fstream>
-#include <vector>
+Listener::Listener(void) {
+	for(ALuint i = 0; i < 3; i++) {
+		listenerPos[i] = 0;
+		listenerOri[i] = 0;
+		listenerVel[i] = 0;
+	}
 
-#ifdef __APPLE__
-#include <OpenGL/OpenGL.h>
-#include <GLUT/glut.h>
-#else
-#include <GL/glut.h>
-#endif
+    alListenerfv(AL_POSITION, listenerPos);
+    alListenerfv(AL_VELOCITY, listenerVel);
+    alListenerfv(AL_ORIENTATION, listenerOri);
+}
 
-using namespace std;
+void Listener::setPos(ALfloat pos[3]) {
+	this->listenerPos[0] = pos[0];
+	this->listenerPos[1] = pos[1];
+	this->listenerPos[2] = pos[2];
+    alListenerfv(AL_POSITION, listenerPos);
+}
 
-#include "Sound.h"
-#include "Light.h"
+void Listener::setPos(ALfloat x, ALfloat y, ALfloat z) {
+	this->listenerPos[0] = x;
+	this->listenerPos[1] = y;
+	this->listenerPos[2] = z;
+    alListenerfv(AL_POSITION, listenerPos);
+}
 
-class ObjMesh;
+Listener::~Listener(void) {
+}
 
-struct Mesh_Struct {
-	string Name;
-	GLfloat pos[3];
-	GLfloat scale[3];
-	GLfloat rot[3];
-	ObjMesh *mesh;
-};
-
-class Scene {
-public:
-	Scene(string filename);
-	void load(string filename);
-	void draw(void);
-	~Scene(void);
-private:
-	ifstream ifstrm;
-	vector<Mesh_Struct> Meshes;
-	vector<Sound*> Sounds;
-	vector<Light*> Lights;
-
-    void playAllSounds(void);
-    void init_Glut(void);
-};
-
-#endif /* SCENE_H_ */
