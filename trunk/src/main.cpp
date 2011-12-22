@@ -57,7 +57,7 @@ void callback_draw(void) {
 }
 
 void callback_reshape(int w, int h) {
-	if (y == 0 || x == 0) return;  //Nothing is visible then, so return
+	if (w == 0 || h == 0) return;  //Nothing is visible then, so return
 	glViewport(0, 0, w, h); //set the viewport to the current window specifications
 	glMatrixMode(GL_PROJECTION); //set the matrix to projection
 	glLoadIdentity();
