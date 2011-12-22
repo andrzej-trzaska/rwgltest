@@ -57,7 +57,8 @@ void callback_draw(void) {
 }
 
 void callback_reshape(int w, int h) {
-	glViewport(0, 0, (GLsizei) w, (GLsizei) h); //set the viewport to the current window specifications
+	if (y == 0 || x == 0) return;  //Nothing is visible then, so return
+	glViewport(0, 0, w, h); //set the viewport to the current window specifications
 	glMatrixMode(GL_PROJECTION); //set the matrix to projection
 	glLoadIdentity();
 	gluPerspective(60, (GLfloat) w / (GLfloat) h, 0.1, 100.0); //set the perspective (angle of sight, width, height, depth)
